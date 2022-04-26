@@ -13,6 +13,20 @@ $vars = array(
     'PMA_PORTS',
     'PMA_SOCKET',
     'PMA_SOCKETS',
+    'PMA_SSL',
+    'PMA_SSL_KEY',
+    'PMA_SSL_CERT',
+    'PMA_SSL_CA',
+    'PMA_SSL_CA_PATH',
+    'PMA_SSL_CIPHERS',
+    'PMA_SSL_VERIFY'
+    'PMA_HOSTS_SSL',
+    'PMA_HOSTS_SSL_KEY',
+    'PMA_HOSTS_SSL_CERT',
+    'PMA_HOSTS_SSL_CA',
+    'PMA_HOSTS_SSL_CA_PATH',
+    'PMA_HOSTS_SSL_CIPHERS',
+    'PMA_HOSTS_SSL_VERIFY'
     'PMA_USER',
     'PMA_PASSWORD',
     'PMA_ABSOLUTE_URI',
@@ -60,10 +74,25 @@ if (!empty($_ENV['PMA_HOST'])) {
     $hosts = array($_ENV['PMA_HOST']);
     $verbose = array($_ENV['PMA_VERBOSE']);
     $ports = array($_ENV['PMA_PORT']);
+
+    $ssl = array($_ENV['PMA_SSL']);
+    $ssl_key = array($_ENV['PMA_SSL_KEY']);
+    $ssl_cert = array($_ENV['PMA_SSL_CERT']);
+    $ssl_ca = array($_ENV['PMA_SSL_CA']);
+    $ssl_ca_path = array($_ENV['PMA_SSL_CA_PATH']);
+    $ssl_ciphers = array($_ENV['PMA_SSL_CIPHERS']);
+    $ssl_verify = array($_ENV['PMA_SSL_VERIFY']);
 } elseif (!empty($_ENV['PMA_HOSTS'])) {
     $hosts = array_map('trim', explode(',', $_ENV['PMA_HOSTS']));
     $verbose = array_map('trim', explode(',', $_ENV['PMA_VERBOSES']));
     $ports = array_map('trim', explode(',', $_ENV['PMA_PORTS']));
+    $ssl = array_map('trim', explode(',', $_ENV['PMA_HOSTS_SSL']));
+    $ssl_key = array_map('trim', explode(',', $_ENV['PMA_HOSTS_SSL_KEY']));
+    $ssl_cert = array_map('trim', explode(',', $_ENV['PMA_HOSTS_SSL_CERT']));
+    $ssl_ca = array_map('trim', explode(',', $_ENV['PMA_HOSTS_SSL_CA']));
+    $ssl_ca_path = array_map('trim', explode(',', $_ENV['PMA_HOSTS_SSL_CA_PATH']));
+    $ssl_ciphers = array_map('trim', explode(',', $_ENV['PMA_HOSTS_SSL_CIPHERS']));
+    $ssl_verify = array_map('trim', explode(',', $_ENV['PMA_HOSTS_SSL_VERIFY']));
 }
 if (!empty($_ENV['PMA_SOCKET'])) {
     $sockets = array($_ENV['PMA_SOCKET']);
@@ -79,6 +108,27 @@ for ($i = 1; isset($hosts[$i - 1]); $i++) {
     }
     if (isset($ports[$i - 1])) {
         $cfg['Servers'][$i]['port'] = $ports[$i - 1];
+    }
+    if (isset($ssl[$i - 1])) {
+        $cfg['Servers'][$i]['ssl'] = $ssl[$i - 1];
+    }
+    if (isset($ssl_key[$i - 1])) {
+        $cfg['Servers'][$i]['ssl_key'] = $ssl_key[$i - 1];
+    }
+    if (isset($ssl_cert[$i - 1])) {
+        $cfg['Servers'][$i]['ssl_cert'] = $ssl_cert[$i - 1];
+    }
+    if (isset($ssl_ca[$i - 1])) {
+        $cfg['Servers'][$i]['ssl_ca'] = $ssl_ca[$i - 1];
+    }
+    if (isset($ssl_ca_path[$i - 1])) {
+        $cfg['Servers'][$i]['ssl_ca_path'] = $ssl_ca_path[$i - 1];
+    }
+    if (isset($ssl_ciphers[$i - 1])) {
+        $cfg['Servers'][$i]['ssl_ciphers'] = $ssl_ciphers[$i - 1];
+    }
+    if (isset($ssl_verify[$i - 1])) {
+        $cfg['Servers'][$i]['ssl_verify'] = $ssl_verify[$i - 1];
     }
     if (isset($_ENV['PMA_USER'])) {
         $cfg['Servers'][$i]['auth_type'] = 'config';
