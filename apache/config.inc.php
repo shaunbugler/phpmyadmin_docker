@@ -35,6 +35,8 @@ $vars = array(
     'PMA_PMADB',
     'PMA_CONTROLUSER',
     'PMA_CONTROLPASS',
+    'PMA_CONTROL_SSL',
+    'PMA_CONTROL_SSL_VERIFY',
     'PMA_QUERYHISTORYDB',
     'PMA_QUERYHISTORYMAX',
     'MAX_EXECUTION_TIME',
@@ -170,6 +172,12 @@ for ($i = 1; isset($hosts[$i - 1]); $i++) {
     }
     if (isset($_ENV['PMA_CONTROLPASS'])) {
       $cfg['Servers'][$i]['controlpass'] = $_ENV['PMA_CONTROLPASS'];
+    }
+    if (isset($_ENV['PMA_CONTROL_SSL'])) {
+      $cfg['Servers'][$i]['control_ssl'] = $_ENV['PMA_CONTROL_SSL'];
+    }
+    if (isset($_ENV['PMA_CONTROL_SSL_VERIFY'])) {
+      $cfg['Servers'][$i]['control_ssl_verify'] = $_ENV['PMA_CONTROL_SSL_VERIFY'];
     }
     $cfg['Servers'][$i]['compress'] = false;
     $cfg['Servers'][$i]['AllowNoPassword'] = true;
